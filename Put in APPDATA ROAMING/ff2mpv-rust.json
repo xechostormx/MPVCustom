@@ -5,7 +5,7 @@
     "start",
     "/min",
     "",
-    "D:\\MPV\\mpv.com",
+    "D:\\MPV\\mpv.bat",
     "--force-window=yes",
     "--msg-level=all=info",
     "--"
