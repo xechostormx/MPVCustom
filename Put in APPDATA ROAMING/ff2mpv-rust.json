@@ -1,0 +1,13 @@
+{
+  "player_command": "cmd",
+  "player_args": [
+    "/c",
+    "start",
+    "/min",
+    "",
+    "D:\\MPV\\mpv.com",
+    "--force-window=yes",
+    "--msg-level=all=info",
+    "--"
+  ]
+}
