@@ -7,12 +7,12 @@ Mpv build is initially 07/12/2025
 Windows only. All useful functions you can add with meson enabled. No Alsa or dsound (yet)
 ----------------------------------
 useful changes:
-----------------------------------
+
 added terminal window when using ff2mpg
 moved to modernz as an interface base
 ----------------------------------
 Found Lua Changes:
-----------------------------------
+
 autosave.lua has been rewriten as:
     autosave_echo.lua — Smart Playback Recovery for MPV
     Description: An enhanced rewrite of MPV’s autosave logic. It periodically writes the watch-later position, captures full local playback state,
@@ -29,4 +29,20 @@ autosave.lua has been rewriten as:
     Script Message API Supports mpv command “script-message restore-last” for manual or external invocation of session restore
     Integration Notes: Place autosave_echo.lua in your scripts/ folder. MPV will auto-restore the last session once on startup if state exists,
 	periodically save watch-later points, and throttle seek saves to prevent hangs.
+	
+sponsorblock_minimal.lua has been rewritten as:
+	sponsorblock_minimal_echo.lua — Lightweight Async SponsorBlock for MPV
+    Description A minimal, zero-hang SponsorBlock integration for MPV that automatically skips unwanted YouTube segments. It fetches skip-segments asynchronously, jumps over sponsor parts with a single OSD notification per segment, and requires no manual toggles or external dependencies beyond MPV and curl.
+    Core Features:
+    Asynchronous Fetch • Uses command_native_async (curl) to download skip segments without freezing playback.
+    Automatic Sponsor Skipping • Detects sponsor segments and jumps forward seamlessly (with a 0.01s buffer).
+    Configurable Categories • Default skips only "sponsor", but you can add "intro", "outro", "selfpromo", "interaction", etc., via script-opts.
+    YouTube-Only Detection • Parses common YouTube URL patterns and skips only when a valid video ID is found.
+    Single OSD Notice • Displays one concise on-screen message (“⏩ skipping 15s”) per segment to avoid spamming.
+    Automatically enables on load when segments exist; no key-binding clutter.
+    No External Dependencies • Pure Lua script; relies only on MPV’s native subprocess support and curl.
+    Simple Configuration if desired • All settings via script-opts/sponsorblock_minimal_echo-*. in mpv.conf (server URL, categories, hash mode).
+    Minimal Logging • Every log is prefixed [sponsorblock_minimal_echo]; control verbosity with MPV’s --msg-level flags.
+    Integration Notes: Place sponsorblock_minimal_echo.lua in your scripts/ folder. Ensure curl is available in your PATH for HTTP requests.
+	you probably have curl in  C:\Program Files\Git\mingw64\bin\
 ----------------------------------

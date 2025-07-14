@@ -1,0 +1,7 @@
+mp.register_event("file-loaded", function()
+    -- Set a timer to run after 3 seconds
+    mp.add_timeout(3, function()
+        -- Apply the vf setting after 3 seconds
+        mp.commandv("vf", "add", "d3d11vpp=scale=2.0:scaling-mode=nvidia")
+    end)
+end)
