@@ -1,14 +1,16 @@
+----------------------------------
 This is designed for D://MPV
 Trying to put it anywhere else is going to be a nightmare due to multiple jsons and bats adding various functions.
 Remember to get the Firefox extension and move the file in the folder!
-
+----------------------------------
 Mpv build is initially 07/12/2025
 Windows only. All useful functions you can add with meson enabled. No Alsa or dsound (yet)
-
+----------------------------------
 useful changes:
 ----------------------------------
 added terminal window when using ff2mpg
-
+moved to modernz as an interface base
+----------------------------------
 Found Lua Changes:
 ----------------------------------
 autosave.lua has been rewriten as:
@@ -27,3 +29,4 @@ autosave.lua has been rewriten as:
     Script Message API Supports mpv command “script-message restore-last” for manual or external invocation of session restore
     Integration Notes: Place autosave_echo.lua in your scripts/ folder. MPV will auto-restore the last session once on startup if state exists,
 	periodically save watch-later points, and throttle seek saves to prevent hangs.
+----------------------------------
