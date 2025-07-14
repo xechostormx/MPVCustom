@@ -1,11 +1,13 @@
-"player_command": "cmd",
-"player_args": [
-  "/c",
-  "start",
-  "/min",
-  "/wait",
-  "D:\\MPV\\mpv.bat",
-  "--force-window=yes",
-  "--msg-level=all=info",
-  "--"
-]
+{
+  "player_command": "cmd",
+  "player_args": [
+    "/c",
+    "start",
+    "/min",
+    "",
+    "D:\\MPV\\mpv.bat",
+    "--force-window=yes",
+    "--msg-level=all=info",
+    "--"
+  ]
+}
