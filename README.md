@@ -2,7 +2,6 @@
 
 # MPV Build for Windows
 
-------------
 
 ## Installation
 This build is designed for `D://MPV`. Placing it elsewhere may cause issues due to multiple JSONs and batch files enabling various functions.  
@@ -17,11 +16,9 @@ This build is designed for `D://MPV`. Placing it elsewhere may cause issues due 
 - Added terminal window for `ff2mpg`.  
 - Switched to `modernz` as the interface base.
 
-------------
+---
 
 ## Lua Script Updates
-
----
 
 ### autosave_echo.lua
 **Smart Playback Recovery for MPV**  
@@ -62,4 +59,3 @@ Place `sponsorblock_minimal_echo.lua` in your `scripts/` folder. Ensure `curl` i
 
 ---
 
-------------
