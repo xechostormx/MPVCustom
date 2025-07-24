@@ -1,3 +1,0 @@
-this requires a firefox extension. AND Firefox, obviously.
-https://addons.mozilla.org/en-US/firefox/addon/ff2mpv/
-add mpv to your path!
