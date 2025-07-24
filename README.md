@@ -1,61 +1,58 @@
-------------
+# Custom mpv Build with Enhanced Features
 
-# MPV Build for Windows
+This repository contains a custom build of [mpv](https://mpv.io/), a powerful, open-source media player, compiled with a rich set of features for enhanced multimedia playback on Windows. Built in the MSYS2 `MINGW64` environment on Windows 11, this configuration includes advanced audio, video, and scripting capabilities, making it ideal for enthusiasts and developers.
 
+## Features
 
-## Installation
-This build is designed for `D://MPV`. Placing it elsewhere may cause issues due to multiple JSONs and batch files enabling various functions.  
-**Important**: Install the Firefox extension and move the provided file into the folder.
+This custom `mpv` build (version 0.40.0-UNKNOWN) includes the following enabled features:
 
-## Build Details
-- **Initial Build Date**: July 12, 2025  
-- **Platform**: Windows only  
-- **Features**: All useful functions enabled via Meson. No ALSA or DSound support (yet).
+- **Audio Outputs**:
+  - **OpenAL**: 3D audio processing for immersive sound (`--ao=openal`).
+  - **DirectSound**: Legacy Windows audio output (`--ao=dsound`).
+  - **WASAPI**: Modern Windows Audio Session API for high-quality audio (`--ao=wasapi`).
+  - **SDL2 Audio**: Cross-platform audio output via SDL2 (`--ao=sdl2`).
 
-## Notable Changes
-- Added terminal window for `ff2mpg`.  
-- Switched to `modernz` as the interface base.
+- **Video Outputs and Rendering**:
+  - **OpenGL**: Hardware-accelerated video rendering with advanced scaling (`--vo=opengl`).
+  - **Direct3D 11**: High-performance Windows video output (`--vo=d3d11`).
+  - **Direct3D 9 Hardware Acceleration**: Legacy Direct3D support (`--vo=d3d9`).
+  - **Vulkan**: Modern graphics API for high-performance rendering (`--vo=vulkan`).
+  - **Vulkan KHR Display**: Direct display output via Vulkan.
+  - **Shaderc and SPIRV-Cross**: Support for advanced shader-based rendering.
 
----
+- **Media Format Support**:
+  - **CDDA**: Audio CD playback (`--cdda`).
+  - **DVD Navigation**: DVD menu and playback support via `libdvdnav` and `libdvdread`.
+  - **Blu-ray**: Blu-ray playback via `libbluray`.
+  - **Game Music Emu**: Playback of video game music formats (e.g., `.spc`, `.nsf`) via `libgme`.
+  - **Teletext and Closed Captions**: Decoding via `libzvbi` (`--vf=vbi`).
+  - **Archive Files**: Playback of media in archives (e.g., `.zip`, `.rar`) via `libarchive`.
 
-## Lua Script Updates
+- **Image and Font Processing**:
+  - **zimg**: High-quality image scaling and colorspace conversion (`--scale=zimg`).
+  - **Fontconfig**: Flexible font selection for OSD and subtitles (`--sub-font`).
+  - **JPEG**: JPEG image decoding.
+  - **Little CMS 2 (lcms2)**: Color management for accurate display.
 
-### autosave_echo.lua
-**Smart Playback Recovery for MPV**  
-An enhanced rewrite of MPV’s autosave logic. Lightweight, zero-config, self-contained, and avoids hangs by throttling seek-triggered saves.
+- **Scripting and Plugins**:
+  - **Lua (LuaJIT)**: High-performance Lua scripting for custom functionality (`--script`).
+  - **JavaScript**: JavaScript scripting for advanced customization.
+  - **C Plugins**: Support for custom C plugins (`--cplugins`).
+  - **LADSPA**: Audio effect plugins for processing (`--af=ladspa`).
+  - **VapourSynth**: Advanced video processing scripts (`--vf=vapoursynth`).
 
-#### Core Features
-- **Periodic Position Saving**: Saves playback position every 30 seconds and after manual seeks (5-second throttle).  
-- **Local State Capture**: Saves last played file path, volume, fullscreen status, subtitle track ID, and audio track ID.  
-- **Session Restoration**: Reopens the last saved file and restores settings on request or automatically at startup.  
-- **File Type Filtering**: Skips saving/restoring for remote streams (URLs with `://`) and HLS playlists (*.m3u8).  
-- **No External Configs**: Fully self-contained; no .conf entries needed.  
-- **Portable Save Location**: Saves `last_state.json` alongside the script using Lua’s `debug.getinfo`.  
-- **Minimal Logging**: Messages prefixed; control verbosity with MPV’s `--msg-level` (e.g., `--msg-level=all=info`).  
-- **Script Message API**: Use `script-message restore-last` for manual session restore.  
+- **Text and Encoding**:
+  - **libass**: Advanced subtitle rendering.
+  - **uchardet**: Automatic charset detection for subtitles.
+  - **iconv**: Character encoding conversion.
 
-#### Integration
-Place `autosave_echo.lua` in your `scripts/` folder. MPV auto-restores the last session on startup if state exists, periodically saves watch-later points, and throttles seek saves.
+- **Other**:
+  - **FFmpeg and libavdevice**: Broad codec and device support.
+  - **SDL2 Gamepad and Video**: Gamepad input and SDL2 video output.
+  - **libplacebo**: Advanced video rendering library.
+  - **zlib**: Compression support.
+  - **Windows-Specific**: Full Windows integration (desktop, executable, threads, paths).
+  - **Debug Build**: Includes debugging symbols for development.
+  - **CACA**: ASCII art video output for fun terminal playback.
 
----
-
-### sponsorblock_minimal_echo.lua
-**Lightweight Async SponsorBlock for MPV**  
-A minimal, zero-hang rewite of sponsorblock_minimal.lua
-SponsorBlock integration skips unwanted YouTube segments. Fetches skip-segments asynchronously and requires only MPV and `curl`.
-
-#### Core Features
-- **Asynchronous Fetch**: Uses `command_native_async` (curl) to download skip segments without freezing playback.  
-- **Automatic Sponsor Skipping**: Skips sponsor segments seamlessly with a 0.01s buffer.  
-- **Configurable Categories**: Skips "sponsor" by default; add "intro", "outro", "selfpromo", etc., via script-opts.  
-- **YouTube-Only Detection**: Parses YouTube URLs and skips only for valid video IDs.  
-- **Single OSD Notice**: Displays one concise message (e.g., “skipping 15s”) per segment.  
-- **No External Dependencies**: Pure Lua; requires only MPV’s subprocess support and `curl`.  
-- **Simple Configuration**: Optional settings via `script-opts/sponsorblock_minimal_echo-*` in `mpv.conf`.  
-- **Minimal Logging**: Logs prefixed; control verbosity with `--msg-level`.  
-
-#### Integration
-Place `sponsorblock_minimal_echo.lua` in your `scripts/` folder. Ensure `curl` is in your PATH (e.g., `C:\Program Files\Git\mingw64\bin\`).
-
----
 
